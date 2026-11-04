@@ -40,6 +40,43 @@ The floating button can be dragged. A simple click hides or shows the top bar.
 
 Tested with a recent release of SillyTavern. The extension targets the `#top-bar` and `#top-settings-holder` elements. If a future update renames them, the bar may no longer hide.
 
+## Troubleshooting
+
+### The "Hide Top Bar" drawer does not appear in Extensions
+
+- Make sure the extension folder is named exactly `hide-top-bar`. The extension loads its files from that path, so a different folder name prevents it from loading. If you installed it from the GitHub URL, the repository name must not have been changed.
+- Reload SillyTavern with **Ctrl+F5** (hard refresh).
+- Open the browser console (**F12**) and look for a red error mentioning `hide-top-bar`. If you edited the files by hand, a missing bracket or a duplicated function in `index.js` is the most common cause.
+- Check that `manifest.json`, `index.js`, `settings.html` and `style.css` are all in the extension folder, at the same level.
+
+### The top bar does not hide, or a blank strip remains at the top
+
+The extension targets the `#top-bar` and `#top-settings-holder` elements, and resets the `--topBarBlockSize` variable. If a SillyTavern update renamed them, the bar may not hide. Right-click the bar, choose **Inspect**, and note the `id` of the element. You can then open an issue with that information.
+
+### The setting is not kept after reloading
+
+Settings are saved when you toggle the checkbox, use **Alt+H**, click the floating button, or release the size slider. If a setting is still lost, check the console (**F12**) for errors, and make sure SillyTavern can write to its data folder.
+
+### The bar is hidden and I cannot get it back
+
+Press **Alt+H**. The shortcut works even when the floating button is disabled. Once the bar is back, open **Extensions → Hide Top Bar** and re-enable the floating button if you want it.
+
+### Alt+H does nothing
+
+Some browsers or operating systems use Alt+letter combinations for their own menus, or another extension may already use it. Click inside the SillyTavern page first, then try again. If the shortcut stays blocked, use the floating button instead.
+
+### The floating button is off-screen or hard to reach
+
+Open **Extensions → Hide Top Bar** and click **Reset button position** to put it back in the top-right corner. If it is too small or too large, use the **Button size** slider, or **Reset button size** to return to 32 px.
+
+### The floating button overlaps another element
+
+Drag it to another spot. Its position is saved. If it is still in the way, you can also lower its size with the slider.
+
+### The floating button does not show up
+
+Check that **Show floating button** is ticked in the drawer. If it is, reload the page and look in the corners of the window, in case its saved position falls outside a smaller window. In that case, click **Reset button position**.
+
 ## License
 
 MIT

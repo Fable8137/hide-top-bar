@@ -85,7 +85,6 @@ function applyState() {
     document.body.classList.toggle("hide-top-bar-active", Boolean(settings.hidden));
     document.body.classList.toggle("hide-top-bar-floating-enabled", Boolean(settings.floatingButton));
     document.documentElement.style.setProperty("--hide-top-bar-btn-size", `${settings.buttonSize}px`);
-    $("#hide_top_bar_checkbox").prop("checked", Boolean(settings.hidden));
     $("#hide_top_bar_floating_checkbox").prop("checked", Boolean(settings.floatingButton));
     $("#hide_top_bar_size_slider").val(settings.buttonSize);
     $("#hide_top_bar_size_value").text(`${settings.buttonSize}px`);
@@ -199,10 +198,6 @@ function resetShortcut() {
     console.log(`[${extensionName}] Shortcut reset`);
 }
 
-function onHiddenCheckboxChange(event) {
-    setHidden($(event.target).prop("checked"));
-}
-
 function onFloatingCheckboxChange(event) {
     setFloatingButton($(event.target).prop("checked"));
 }
@@ -287,7 +282,6 @@ jQuery(async () => {
         btn.addEventListener("pointerup", onPointerUp);
         btn.addEventListener("pointercancel", onPointerCancel);
 
-        $("#hide_top_bar_checkbox").on("input", onHiddenCheckboxChange);
         $("#hide_top_bar_floating_checkbox").on("input", onFloatingCheckboxChange);
         $("#hide_top_bar_size_slider").on("input", onSizeInput);
         $("#hide_top_bar_size_slider").on("change", onSizeChange);

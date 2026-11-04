@@ -35,3 +35,48 @@ body.hide-top-bar-active {
 body.hide-top-bar-floating-enabled #hide_top_bar_floating_btn {
     display: flex;
 }
+
+/* Settings drawer layout */
+.hide-top-bar-settings .hide-top-bar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.15));
+}
+
+.hide-top-bar-settings .hide-top-bar-section:first-child {
+    border-top: none;
+    padding-top: 4px;
+}
+
+.hide-top-bar-settings .hide-top-bar-title {
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.hide-top-bar-settings .hide-top-bar-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hide-top-bar-settings .hide-top-bar-slider input[type="range"] {
+    width: 100%;
+}
+
+.hide-top-bar-settings .hide-top-bar-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.hide-top-bar-settings .hide-top-bar-row .menu_button {
+    flex: 1 1 auto;
+    width: auto;
+    margin: 0;
+}
+
+.hide-top-bar-settings small {
+    opacity: 0.7;
+}

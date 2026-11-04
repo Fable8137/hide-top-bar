@@ -41,13 +41,7 @@ body.hide-top-bar-floating-enabled #hide_top_bar_floating_btn {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 12px 0;
-    border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent);
-}
-
-.hide-top-bar-settings .hide-top-bar-section:first-child {
-    border-top: none;
-    padding-top: 4px;
+    padding: 10px 0 14px 0;
 }
 
 .hide-top-bar-settings .hide-top-bar-title {

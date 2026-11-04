@@ -6,7 +6,6 @@
   "optional": [],
   "js": "index.js",
   "css": "style.css",
-  "author": "Toi",
   "version": "0.1.0",
-  "homePage": ""
+  "homePage": "https://github.com/Fable8137/hide-top-bar/"
 }

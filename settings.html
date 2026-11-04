@@ -5,34 +5,46 @@
             <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
         </div>
         <div class="inline-drawer-content">
-            <label class="checkbox_label" for="hide_top_bar_checkbox">
-                <input id="hide_top_bar_checkbox" type="checkbox" />
-                <span>Hide the top bar</span>
-            </label>
-            <label class="checkbox_label" for="hide_top_bar_floating_checkbox">
-                <input id="hide_top_bar_floating_checkbox" type="checkbox" />
-                <span>Show floating button</span>
-            </label>
-            <div>
-                <label for="hide_top_bar_size_slider">Button size: <span id="hide_top_bar_size_value">32px</span></label>
-                <input id="hide_top_bar_size_slider" type="range" min="20" max="64" step="2" value="32" />
+
+            <div class="hide-top-bar-section">
+                <div class="hide-top-bar-title">Visibility</div>
+                <label class="checkbox_label" for="hide_top_bar_checkbox">
+                    <input id="hide_top_bar_checkbox" type="checkbox" />
+                    <span>Hide the top bar</span>
+                </label>
             </div>
-            <div>
-                <input id="hide_top_bar_reset_btn" class="menu_button" type="submit" value="Reset button position" />
+
+            <div class="hide-top-bar-section">
+                <div class="hide-top-bar-title">Floating button</div>
+                <label class="checkbox_label" for="hide_top_bar_floating_checkbox">
+                    <input id="hide_top_bar_floating_checkbox" type="checkbox" />
+                    <span>Show floating button</span>
+                </label>
+                <div class="hide-top-bar-slider">
+                    <label for="hide_top_bar_size_slider">
+                        Size: <span id="hide_top_bar_size_value">32px</span>
+                    </label>
+                    <input id="hide_top_bar_size_slider" type="range" min="20" max="64" step="2" value="32" />
+                </div>
+                <div class="hide-top-bar-row">
+                    <input id="hide_top_bar_reset_btn" class="menu_button" type="submit" value="Reset button position" />
+                    <input id="hide_top_bar_reset_size_btn" class="menu_button" type="submit" value="Reset button size" />
+                </div>
+                <small>Drag the button to move it. A simple click hides or shows the bar.</small>
             </div>
-            <div>
-                <input id="hide_top_bar_reset_size_btn" class="menu_button" type="submit" value="Reset button size" />
+
+            <div class="hide-top-bar-section">
+                <div class="hide-top-bar-title">Keyboard shortcut</div>
+                <div class="hide-top-bar-current">
+                    Current: <b id="hide_top_bar_shortcut_label">Alt+H</b>
+                </div>
+                <div class="hide-top-bar-row">
+                    <input id="hide_top_bar_shortcut_btn" class="menu_button" type="submit" value="Change shortcut" />
+                    <input id="hide_top_bar_shortcut_reset_btn" class="menu_button" type="submit" value="Reset shortcut" />
+                </div>
+                <small>Click "Change shortcut", then press the new combination (it must include Ctrl, Alt or Meta). Esc cancels.</small>
             </div>
-            <div>
-                <span>Shortcut: <b id="hide_top_bar_shortcut_label">Alt+H</b></span>
-            </div>
-            <div>
-                <input id="hide_top_bar_shortcut_btn" class="menu_button" type="submit" value="Change shortcut" />
-            </div>
-            <div>
-                <input id="hide_top_bar_shortcut_reset_btn" class="menu_button" type="submit" value="Reset shortcut" />
-            </div>
-            <p><small>Click "Change shortcut", then press the new combination (it must include Ctrl, Alt or Meta). Esc cancels.</small></p>
+
         </div>
     </div>
 </div>

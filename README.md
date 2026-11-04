@@ -4,7 +4,7 @@ A SillyTavern extension that hides the top menu bar to give the chat more room.
 
 ## Features
 
-- Hide or show the top bar with a checkbox, the **Alt+H** shortcut, or a floating button
+- Hide or show the top bar with a checkbox, a customizable keyboard shortcut (**Alt+H** by default), or a floating button
 - Optional floating button, draggable anywhere on screen (mouse or touch)
 - Adjustable button size (20 to 64 px)
 - "Reset button position" and "Reset button size" buttons
@@ -31,10 +31,12 @@ Open **Extensions** and find **Hide Top Bar** in the right-hand column.
 | Button size | Resizes the floating button |
 | Reset button position | Puts the button back in the top-right corner |
 | Reset button size | Puts the button back to 32 px |
+| Change shortcut | Click, then press a new combination (must include Ctrl, Alt or Meta). Esc cancels |
+| Reset shortcut | Goes back to Alt+H |
 
 The floating button can be dragged. A simple click hides or shows the top bar.
 
-**Alt+H** works at all times, even when the floating button is disabled. If the bar is hidden and you have no button, use this shortcut to bring it back.
+The keyboard shortcut works at all times, even when the floating button is disabled. If the bar is hidden and you have no button, use it to bring the bar back. Some combinations (such as Ctrl+W or Ctrl+T) are reserved by the browser and cannot be used.
 
 ## Compatibility
 
@@ -61,9 +63,9 @@ Settings are saved when you toggle the checkbox, use **Alt+H**, click the floati
 
 Press **Alt+H**. The shortcut works even when the floating button is disabled. Once the bar is back, open **Extensions → Hide Top Bar** and re-enable the floating button if you want it.
 
-### Alt+H does nothing
+### The keyboard shortcut does nothing
 
-Some browsers or operating systems use Alt+letter combinations for their own menus, or another extension may already use it. Click inside the SillyTavern page first, then try again. If the shortcut stays blocked, use the floating button instead.
+Another extension, your browser or your operating system may be using that combination. Click inside the SillyTavern page first, then try again. If it is still blocked, open **Extensions → Hide Top Bar**, click **Change shortcut** and pick another combination, or click **Reset shortcut** to go back to Alt+H.
 
 ### The floating button is off-screen or hard to reach
 

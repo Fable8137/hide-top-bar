@@ -2,9 +2,11 @@
 
 A SillyTavern extension that hides the top menu bar to give the chat more room.
 
-**This is a vibecoded extension !**
+**THIS IS A VIBECODED EXTENSION !**
 
 My skills in coding are very weak, so please be aware of that. Everything should works, thought. If it isn't the case, please open an issue and I'll see what I can do. 
+
+Made with Claude (Sonet 5.5)
 
 ## Features
 

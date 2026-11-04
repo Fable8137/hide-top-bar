@@ -20,7 +20,7 @@ body.hide-top-bar-active {
     border-radius: 50%;
     background: var(--SmartThemeBlurTintColor, rgba(0, 0, 0, 0.6));
     color: var(--SmartThemeBodyColor, #fff);
-    border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.3));
+    border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
     cursor: grab;
     touch-action: none;
     user-select: none;
@@ -41,8 +41,8 @@ body.hide-top-bar-floating-enabled #hide_top_bar_floating_btn {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 10px 0;
-    border-top: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.15));
+    padding: 12px 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 }
 
 .hide-top-bar-settings .hide-top-bar-section:first-child {
@@ -52,7 +52,12 @@ body.hide-top-bar-floating-enabled #hide_top_bar_floating_btn {
 
 .hide-top-bar-settings .hide-top-bar-title {
     font-weight: bold;
-    opacity: 0.8;
+    font-size: 1.05em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 1;
+    padding-bottom: 4px;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 }
 
 .hide-top-bar-settings .hide-top-bar-slider {

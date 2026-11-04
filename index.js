@@ -9,10 +9,21 @@ const defaultSettings = {
     hidden: false,
     floatingButton: true,
     buttonPosition: null,
-    buttonSize: 32
+    buttonSize: 32,
+    shortcut: {
+        code: "KeyH",
+        label: "H",
+        ctrlKey: false,
+        altKey: true,
+        shiftKey: false,
+        metaKey: false
+    }
 };
 
+const MODIFIER_KEYS = ["Control", "Alt", "Shift", "Meta", "AltGraph"];
+
 let drag = null;
+let capturing = false;
 
 function getButton() {
     return document.getElementById("hide_top_bar_floating_btn");
@@ -41,6 +52,34 @@ function applyButtonPosition() {
     moveButton(btn, clamped.x, clamped.y);
 }
 
+function formatShortcut(shortcut) {
+    const parts = [];
+    if (shortcut.ctrlKey) parts.push("Ctrl");
+    if (shortcut.altKey) parts.push("Alt");
+    if (shortcut.shiftKey) parts.push("Shift");
+    if (shortcut.metaKey) parts.push("Meta");
+    parts.push(shortcut.label);
+    return parts.join("+");
+}
+
+function keyLabel(event) {
+    if (event.key === " ") return "Space";
+    if (/^[a-z0-9]$/i.test(event.key)) return event.key.toUpperCase();
+    if (event.key.length > 1) return event.key;
+    return event.code.replace(/^(Key|Digit)/, "");
+}
+
+function matchesShortcut(event) {
+    const s = extension_settings[extensionName].shortcut;
+    return (
+        event.code === s.code &&
+        event.ctrlKey === s.ctrlKey &&
+        event.altKey === s.altKey &&
+        event.shiftKey === s.shiftKey &&
+        event.metaKey === s.metaKey
+    );
+}
+
 function applyState() {
     const settings = extension_settings[extensionName];
     document.body.classList.toggle("hide-top-bar-active", Boolean(settings.hidden));
@@ -50,6 +89,7 @@ function applyState() {
     $("#hide_top_bar_floating_checkbox").prop("checked", Boolean(settings.floatingButton));
     $("#hide_top_bar_size_slider").val(settings.buttonSize);
     $("#hide_top_bar_size_value").text(`${settings.buttonSize}px`);
+    $("#hide_top_bar_shortcut_label").text(formatShortcut(settings.shortcut));
     applyButtonPosition();
 }
 
@@ -71,7 +111,7 @@ function loadSettings() {
     extension_settings[extensionName] = extension_settings[extensionName] || {};
     for (const [key, value] of Object.entries(defaultSettings)) {
         if (extension_settings[extensionName][key] === undefined) {
-            extension_settings[extensionName][key] = value;
+            extension_settings[extensionName][key] = (value && typeof value === "object") ? { ...value } : value;
         }
     }
     applyState();
@@ -106,6 +146,57 @@ function resetButtonSize() {
     saveSettings();
     toastr.info("Button size reset", "Hide Top Bar");
     console.log(`[${extensionName}] Button size reset`);
+}
+
+function startCapture(event) {
+    capturing = true;
+    $("#hide_top_bar_shortcut_btn").val("Press keys... (Esc to cancel)");
+    event.currentTarget.focus();
+}
+
+function stopCapture() {
+    capturing = false;
+    $("#hide_top_bar_shortcut_btn").val("Change shortcut");
+}
+
+function handleCapture(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.code === "Escape") {
+        stopCapture();
+        return;
+    }
+
+    if (MODIFIER_KEYS.includes(event.key)) return;
+
+    if (!event.ctrlKey && !event.altKey && !event.metaKey) {
+        toastr.warning("Include Ctrl, Alt or Meta in the shortcut.", "Hide Top Bar");
+        return;
+    }
+
+    extension_settings[extensionName].shortcut = {
+        code: event.code,
+        label: keyLabel(event),
+        ctrlKey: event.ctrlKey,
+        altKey: event.altKey,
+        shiftKey: event.shiftKey,
+        metaKey: event.metaKey
+    };
+    stopCapture();
+    applyState();
+    saveSettings();
+    toastr.success(`Shortcut set to ${formatShortcut(extension_settings[extensionName].shortcut)}`, "Hide Top Bar");
+    console.log(`[${extensionName}] Shortcut:`, extension_settings[extensionName].shortcut);
+}
+
+function resetShortcut() {
+    stopCapture();
+    extension_settings[extensionName].shortcut = { ...defaultSettings.shortcut };
+    applyState();
+    saveSettings();
+    toastr.info("Shortcut reset to Alt+H", "Hide Top Bar");
+    console.log(`[${extensionName}] Shortcut reset`);
 }
 
 function onHiddenCheckboxChange(event) {
@@ -169,7 +260,11 @@ function onPointerCancel() {
 }
 
 function onKeyDown(event) {
-    if (event.altKey && !event.ctrlKey && !event.metaKey && event.code === "KeyH") {
+    if (capturing) {
+        handleCapture(event);
+        return;
+    }
+    if (matchesShortcut(event)) {
         event.preventDefault();
         setHidden(!extension_settings[extensionName].hidden);
     }
@@ -198,7 +293,10 @@ jQuery(async () => {
         $("#hide_top_bar_size_slider").on("change", onSizeChange);
         $("#hide_top_bar_reset_btn").on("click", resetButtonPosition);
         $("#hide_top_bar_reset_size_btn").on("click", resetButtonSize);
-        document.addEventListener("keydown", onKeyDown);
+        $("#hide_top_bar_shortcut_btn").on("click", startCapture);
+        $("#hide_top_bar_shortcut_btn").on("blur", stopCapture);
+        $("#hide_top_bar_shortcut_reset_btn").on("click", resetShortcut);
+        document.addEventListener("keydown", onKeyDown, true);
         window.addEventListener("resize", applyButtonPosition);
         loadSettings();
 
